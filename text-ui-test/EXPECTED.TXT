@@ -1,7 +1,31 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+_____________________________
+Hello, I'm Jerome!
+What can I do for you?
+_____________________________
+_____________________________
+Got it! I added:
+[T][ ] read book
+There are now 1 tasks!
+_____________________________
+_____________________________
+Got it! I added:
+[E][ ] project meeting(from: Mon 2pm to: 4pm)
+There are now 2 tasks!
+_____________________________
+_____________________________
+Got it! I added:
+[D][ ] return book(by: Sunday)
+There are now 3 tasks!
+_____________________________
+Here are you tasks:
+1. [T][ ] read book
+2. [E][ ] project meeting(from: Mon 2pm to: 4pm)
+3. [D][ ] return book(by: Sunday)
+Nice! I have marked the following task as complete!
+[E][x] project meeting(from: Mon 2pm to: 4pm)
+Aww! I will unmark the following task...
+[T][ ] read book
+Please specify a valid task :)
+Bye. Hope to see you soon!
+_____________________________
 
