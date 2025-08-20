@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean completed;
 
@@ -24,9 +24,5 @@ public class Task {
                            : " ");
     }
 
-    @Override
-    public String toString() {
-        String str = "[" + this.getStatus() + "] " + this.description;
-        return str;
-    }
+    public abstract String toString();
 }

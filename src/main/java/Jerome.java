@@ -14,6 +14,7 @@ public class Jerome {
         while (true) {
             //user input
             String response = sc.nextLine();
+
             if (response.equals("bye")) {
                 break;
             }
@@ -46,14 +47,46 @@ public class Jerome {
                         ls.get(Integer.parseInt(input[1]) - 1).mark();
                     }
                 } catch (NumberFormatException e) {
-                    //if input is mark __ where it is not an integer.
+                    //if input is mark x where x is not an integer.
                     System.out.println("Sorry! I can't find that task :(");
                 }
             } else {
-                //add task, echo
-                Task task = new Task(response);
-                ls.add(task);
-                System.out.println(line + "\n" + "added: " + response + "\n" + line);
+                //process input
+                String[] formattedInput = response.split("/", 2);
+                String[] typeAndTask = formattedInput[0].split(" ", 2);
+                String taskType = typeAndTask[0];
+                String description = typeAndTask[1];
+
+                if (taskType.equals("todo")) {
+
+                    Task task = new Todo(description);
+                    ls.add(task);
+                    System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
+                            "There are now " + ls.size() + " tasks!\n" + line);
+
+                } else if (taskType.equals("event")) {
+
+                    String[] timeFrame = formattedInput[1].split("/");
+                    String from = timeFrame[0].substring(5);
+                    String to = timeFrame[1].substring(3);
+                    Task task = new Event(description, from, to);
+                    ls.add(task);
+                    System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
+                            "There are now " + ls.size() + " tasks!\n" + line);
+
+                } else if (taskType.equals("deadline")) {
+
+                    String by = formattedInput[1].substring(3);
+                    Task task = new Deadline(description, by);
+                    ls.add(task);
+                    System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
+                            "There are now " + ls.size() + " tasks!\n" + line);
+
+                } else {
+
+                    System.out.println("Please specify a valid task :)");
+
+                }
             }
         }
         //ending
