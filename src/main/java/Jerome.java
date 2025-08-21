@@ -49,6 +49,21 @@ public class Jerome {
                     //if input is mark x where x is not an integer.
                     System.out.println("Sorry! I can't find that task :(");
                 }
+            } else if (response.startsWith("delete")) {
+                String[] input = response.split(" ");
+                try {
+                    int ind = Integer.parseInt(input[1]) - 1;
+                    if (ind < 0 || ind >= ls.size()) {
+                        System.out.println("Sorry! I can't find that task :(");
+                        continue;
+                    }
+                    Task temp = ls.get(Integer.parseInt(input[1]) - 1);
+                    ls.remove(Integer.parseInt(input[1]) - 1);
+                    System.out.println(line + "\nOritey! I have removed this task: \n" + temp + "\n" +
+                            "There are now " + ls.size() + " task(s)!\n" + line);
+                } catch (NumberFormatException e) {
+                    System.out.println("Sorry I can't find that task to delete. Maybe it doesn't exist :)");
+                }
             } else {
                 try {
                     //process input
