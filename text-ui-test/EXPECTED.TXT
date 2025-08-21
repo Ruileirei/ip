@@ -17,6 +17,15 @@ Got it! I added:
 [D][ ] return book(by: Sunday)
 There are now 3 tasks!
 _____________________________
+_____________________________
+Aww, todo does not take in the argument(s) 'from'
+_____________________________
+_____________________________
+Aww, event does not take in the argument(s) 'by'
+_____________________________
+_____________________________
+Aww, deadline does not take in the argument(s) 'from'
+_____________________________
 Here are you tasks:
 1. [T][ ] read book
 2. [E][ ] project meeting(from: Mon 2pm to: 4pm)
@@ -25,7 +34,8 @@ Nice! I have marked the following task as complete!
 [E][x] project meeting(from: Mon 2pm to: 4pm)
 Aww! I will unmark the following task...
 [T][ ] read book
-Please specify a valid task :)
+_____________________________
+Oh deary me... I'm sorry, but I don't know what task this is :-(
+_____________________________
 Bye. Hope to see you soon!
 _____________________________
-
