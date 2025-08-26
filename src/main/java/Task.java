@@ -19,6 +19,14 @@ public abstract class Task {
         System.out.println(this);
     }
 
+    public boolean isDone() {
+        return completed;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatus() {
         return (completed ? "x"
                            : " ");

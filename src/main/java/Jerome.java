@@ -2,11 +2,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Jerome {
+    private static final Storage STORAGE = new Storage();
     public static void main(String[] args) {
         String line = "_____________________________";
         ArrayList<Task> ls = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-
+        STORAGE.makeExist();
+        ls.addAll(STORAGE.load());
         //introduction
         System.out.println(line + "\nHello, I'm Jerome!\n" +  "What can I do for you?\n" + line);
 
@@ -45,6 +47,7 @@ public class Jerome {
                     } else {
                         ls.get(Integer.parseInt(input[1]) - 1).mark();
                     }
+                    STORAGE.save(ls);
                 } catch (NumberFormatException e) {
                     //if input is mark x where x is not an integer.
                     System.out.println("Sorry! I can't find that task :(");
@@ -61,6 +64,7 @@ public class Jerome {
                     ls.remove(Integer.parseInt(input[1]) - 1);
                     System.out.println(line + "\nOritey! I have removed this task: \n" + temp + "\n" +
                             "There are now " + ls.size() + " task(s)!\n" + line);
+                    STORAGE.save(ls);
                 } catch (NumberFormatException e) {
                     System.out.println("Sorry I can't find that task to delete. Maybe it doesn't exist :)");
                 }
@@ -92,7 +96,7 @@ public class Jerome {
                         ls.add(task);
                         System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
                                 "There are now " + ls.size() + " tasks!\n" + line);
-
+                        STORAGE.save(ls);
                     } else if (taskType.equals("event")) {
                         if (response.equals("event")) {
                             throw new JeromeException.EmptyTaskException("event");
@@ -113,6 +117,7 @@ public class Jerome {
                             ls.add(task);
                             System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
                                     "There are now " + ls.size() + " tasks!\n" + line);
+                            STORAGE.save(ls);
                         }
 
                     } else if (taskType.equals("deadline")) {
@@ -137,6 +142,7 @@ public class Jerome {
                         ls.add(task);
                         System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
                                 "There are now " + ls.size() + " tasks!\n" + line);
+                        STORAGE.save(ls);
 
                     } else {
                         throw new JeromeException.InvalidTaskTypeException();
