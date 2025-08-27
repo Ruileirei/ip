@@ -1,10 +1,23 @@
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.nio.file.*;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 
+/**
+ * Encapsulates loading/saving tasks to and from Jerome.txt
+ * Format:
+ *  T | 1/0 | description
+ *  D | 1/0 | description | by
+ *  E | 1/0 | description | from | to
+ *
+ */
+
 public class Storage {
-    private static final String div = " | ";
+    private static final String DIV = " | ";
     private final Path loc;
 
     public Storage() {
@@ -28,6 +41,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads Jerome.txt (if it exists) and adds the saved tasks into the list when Jerome.java is run
+     *
+     */
+
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         if (!Files.exists(loc)) return tasks;
@@ -40,14 +58,14 @@ public class Storage {
                 if (line.isEmpty()) {
                     continue;
                 }
-                String[] substr = line.split("\\s\\|\\s");
-                if (substr.length < 3) {
+                String[] subStr = line.split("\\s\\|\\s");
+                if (subStr.length < 3) {
                     System.out.println("Warning: Skipping corrupted line " + lineNum + " (Too few fields).");
                     continue;
                 }
-                String type = substr[0].trim();
-                String status = substr[1].trim();
-                String desc = substr[2].trim();
+                String type = subStr[0].trim();
+                String status = subStr[1].trim();
+                String desc = subStr[2].trim();
                 boolean bool;
 
                 if (status.equals("1")) {
@@ -66,21 +84,31 @@ public class Storage {
                             task = new Todo(desc);
                             break;
                         case "D":
-                            if (substr.length < 4) {
+                            if (subStr.length < 4) {
                                 System.out.println("Warning: Skipping corrupted line " + lineNum + " (Missing deadline '/by').");
                                 continue;
                             }
-                            String by = substr[3].trim();
-                            task = new Deadline(desc, by);
+                            try {
+                                String by = subStr[3].trim();
+                                task = new Deadline(desc, by);
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Warning: Skipping line " + lineNum + " (Invalid datetime format).");
+                                continue;
+                            }
                             break;
                         case "E":
-                            if (substr.length < 5) {
+                            if (subStr.length < 5) {
                                 System.out.println("Warning: Skipping corrupted line " + lineNum + " (Missing event '/from' or '/to').");
                                 continue;
                             }
-                            String from = substr[3].trim();
-                            String to = substr[4].trim();
-                            task = new Event(desc, from, to);
+                            try {
+                                String from = subStr[3].trim();
+                                String to = subStr[4].trim();
+                                task = new Event(desc, from, to);
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Warning: Skipping line " + lineNum + " (Invalid datetime format).");
+                                continue;
+                            }
                             break;
                         default:
                             System.out.println("Warning: Skipping corrupted line " + lineNum + " (Unknown type: " + type + ").");
@@ -99,6 +127,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Formats every task in a List of tasks, and adds them into Jerome.txt
+     *
+     */
+
     public void save(List<Task> tasks) {
         List<String> output = new ArrayList<>();
         for (Task t : tasks) {
@@ -111,17 +144,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Formats a task into a single string before being added to Jerome.txt
+     * Format:
+     *  T | 1/0 | description
+     *  D | 1/0 | description | by
+     *  E | 1/0 | description | from | to
+     *
+     */
+
     private static String formatting(Task t) {
         int status = t.isDone() ? 1 : 0;
         if (t instanceof Todo) {
-            return "T" + div + status + div + ((Todo) t).getDescription();
-        } else if (t instanceof Deadline) {
-            Deadline d = (Deadline) t;
-            return "D" + div + status + div + d.getDescription() + div + d.getBy();
-        } else if (t instanceof Event) {
-            Event eve = (Event) t;
-            return "E" + div + status + div + eve.getDescription() + div + eve.getFrom() + div + eve.getTo();
+            return "T" + DIV + status + DIV + t.getDescription();
+        } else if (t instanceof Deadline d) {
+            return "D" + DIV + status + DIV + d.getDescription() + DIV + d.getByRaw();
+        } else if (t instanceof Event eve) {
+            return "E" + DIV + status + DIV + eve.getDescription() + DIV + eve.getFromRaw() + DIV + eve.getToRaw();
         } else
-            return "T" + div + status + div + t.toString();
+            return "T" + DIV + status + DIV + t.toString();
     }
 }

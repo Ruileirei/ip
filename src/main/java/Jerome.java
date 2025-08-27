@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ public class Jerome {
         Scanner sc = new Scanner(System.in);
         STORAGE.makeExist();
         ls.addAll(STORAGE.load());
+
         //introduction
         System.out.println(line + "\nHello, I'm Jerome!\n" +  "What can I do for you?\n" + line);
 
@@ -32,6 +34,7 @@ public class Jerome {
                     for (int i = 0; i < ls.size(); i++) {
                         System.out.println((i + 1) + ". " + ls.get(i));
                     }
+                    System.out.println(line);
                 }
             } else if (response.startsWith("unmark") || response.startsWith("mark")) {
                 //marking and unmarking a task
@@ -110,14 +113,29 @@ public class Jerome {
                             if (!response.contains("/from") || !response.contains("/to")) {
                                 throw new JeromeException.InvalidTaskDeclarationException("event");
                             }
-                            String[] timeFrame = formattedInput[1].split("/");
-                            String from = timeFrame[0].substring(5);
-                            String to = timeFrame[1].substring(3);
-                            Task task = new Event(desc, from, to);
-                            ls.add(task);
-                            System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
-                                    "There are now " + ls.size() + " tasks!\n" + line);
-                            STORAGE.save(ls);
+                            String eventArgs = formattedInput[1];
+                            System.out.println(eventArgs);
+                            int fromIndex = eventArgs.indexOf("from ");
+                            int toIndex = eventArgs.indexOf("/to ");
+
+                            if (fromIndex == -1 || toIndex == -1 || fromIndex >= toIndex) {
+                                throw new JeromeException.InvalidTaskDeclarationException("event");
+                            }
+
+                            String from = eventArgs.substring(fromIndex + 6, toIndex).trim();
+                            String to = eventArgs.substring(toIndex + 4).trim();
+
+                            try {
+                                Task task = new Event(desc, from, to);
+                                ls.add(task);
+                                System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
+                                        "There are now " + ls.size() + " tasks!\n" + line);
+                                STORAGE.save(ls);
+                            } catch (DateTimeParseException e) {
+                                System.out.println(line
+                                        + "\nSorry! The date/time must be in format: "
+                                        + "d/M/yyyy HHmm (e.g., 2/12/2019 1800)\n" + line);
+                            }
                         }
 
                     } else if (taskType.equals("deadline")) {
@@ -138,11 +156,18 @@ public class Jerome {
                             throw new JeromeException.InvalidTaskDeclarationException("deadline");
                         }
                         String by = formattedInput[1].substring(3);
-                        Task task = new Deadline(desc, by);
-                        ls.add(task);
-                        System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
-                                "There are now " + ls.size() + " tasks!\n" + line);
-                        STORAGE.save(ls);
+                        try {
+                            Task task = new Deadline(desc, by);
+                            ls.add(task);
+                            System.out.println(line + "\n" + "Got it! I added:\n" + task + "\n" +
+                                    "There are now " + ls.size() + " tasks!\n" + line);
+                            STORAGE.save(ls);
+                        } catch (DateTimeParseException e) {
+                            System.out.println(line
+                                    + "\nSorry! The date/time must be in format: "
+                                    + "d/M/yyyy HHmm (e.g., 2/12/2019 1800)\n" + line);
+                        }
+
 
                     } else {
                         throw new JeromeException.InvalidTaskTypeException();
