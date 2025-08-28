@@ -1,8 +1,10 @@
+package Jerome.util;
+
 public class JeromeException extends Exception {
     public JeromeException(String message) {
         super(message);
     }
-    //Task used is wrong/invalid
+    //Jerome.Jerome.task.Task used is wrong/invalid
     public static class InvalidTaskTypeException extends JeromeException {
         public InvalidTaskTypeException() {
             super("Oh deary me... I'm sorry, but I don't know what task this is :-(");

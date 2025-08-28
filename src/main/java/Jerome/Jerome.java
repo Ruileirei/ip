@@ -1,3 +1,11 @@
+package Jerome;
+
+import Jerome.command.Command;
+import Jerome.storage.Storage;
+import Jerome.ui.Ui;
+import Jerome.util.JeromeException;
+import Jerome.util.Parser;
+
 public class Jerome {
     private Storage storage;
     private Ui ui;

@@ -1,3 +1,11 @@
+package Jerome.storage;
+
+import Jerome.TaskList;
+import Jerome.task.Deadline;
+import Jerome.task.Event;
+import Jerome.task.Task;
+import Jerome.task.Todo;
+
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -8,7 +16,7 @@ import java.nio.file.Paths;
 import java.io.IOException;
 
 /**
- * Encapsulates loading/saving tasks to and from Jerome.txt
+ * Encapsulates loading/saving tasks to and from Jerome.Jerome.txt
  * Format:
  *  T | 1/0 | description
  *  D | 1/0 | description | by
@@ -21,7 +29,7 @@ public class Storage {
     private final Path loc;
 
     public Storage() {
-        this(Paths.get("data", "Jerome.txt"));
+        this(Paths.get("data", "Jerome.Jerome.txt"));
     }
 
     public Storage(Path loc) {
@@ -42,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Reads Jerome.txt (if it exists) and adds the saved tasks into the list when Jerome.java is run
+     * Reads Jerome.Jerome.txt (if it exists) and adds the saved tasks into the list when Jerome.Jerome.java is run
      *
      */
 
@@ -128,7 +136,7 @@ public class Storage {
     }
 
     /**
-     * Formats every task in a List of tasks, and adds them into Jerome.txt
+     * Formats every task in a List of tasks, and adds them into Jerome.Jerome.txt
      *
      */
 
@@ -146,7 +154,7 @@ public class Storage {
     }
 
     /**
-     * Formats a task into a single string before being added to Jerome.txt
+     * Formats a task into a single string before being added to Jerome.Jerome.txt
      * Format:
      *  T | 1/0 | description
      *  D | 1/0 | description | by

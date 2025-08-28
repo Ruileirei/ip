@@ -1,3 +1,7 @@
+package Jerome.ui;
+
+import Jerome.task.Task;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,7 +11,7 @@ public class Ui {
 
     public void welcomeText() {
         System.out.println(LINE
-                + "\nWassup, I'm Jerome!\nWhat can I do for you?\n"
+                + "\nWassup, I'm Jerome.Jerome!\nWhat can I do for you?\n"
                 + LINE);
     }
 

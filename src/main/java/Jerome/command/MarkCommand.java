@@ -1,3 +1,10 @@
+package Jerome.command;
+
+import Jerome.task.Task;
+import Jerome.TaskList;
+import Jerome.ui.Ui;
+import Jerome.storage.Storage;
+
 public class MarkCommand extends Command {
     private final int index;
     private final boolean isUnmark;

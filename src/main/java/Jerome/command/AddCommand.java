@@ -1,4 +1,11 @@
-public class AddCommand extends Command{
+package Jerome.command;
+
+import Jerome.task.Task;
+import Jerome.TaskList;
+import Jerome.ui.Ui;
+import Jerome.storage.Storage;
+
+public class AddCommand extends Command {
     private final Task task;
 
     public AddCommand(Task task) {

@@ -1,3 +1,10 @@
+package Jerome.util;
+
+import Jerome.command.*;
+import Jerome.task.Deadline;
+import Jerome.task.Event;
+import Jerome.task.Todo;
+
 public class Parser {
     public static String getTaskType(String input) {
         return input.split(" ", 2)[0];
