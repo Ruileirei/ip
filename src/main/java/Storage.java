@@ -132,9 +132,10 @@ public class Storage {
      *
      */
 
-    public void save(List<Task> tasks) {
+    public void save(TaskList tasks) {
         List<String> output = new ArrayList<>();
-        for (Task t : tasks) {
+        List<Task> ts = tasks.getAll();
+        for (Task t : ts) {
             output.add(formatting(t));
         }
         try {

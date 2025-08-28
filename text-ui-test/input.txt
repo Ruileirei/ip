@@ -1,11 +1,13 @@
 todo read book
-event project meeting /from Mon 2pm /to 4pm
-deadline return book /by Sunday
-todo /from here
-event some event /by tomorrow /from Mon /to Tue
-deadline another task /from Monday
+deadline return book /by 2/12/2019 1800
+event project meeting /from 2/12/2019 1400 /to 2/12/2019 1600
 list
 mark 2
-unmark 1
-nonsense task here
+unmark 2
+delete 1
+list
+blah
+deadline oops
+todo hey /by 2/12/2019 1800
 bye
+

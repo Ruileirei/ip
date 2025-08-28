@@ -1,39 +1,44 @@
-public class JeromeException {
+public class JeromeException extends Exception {
+    public JeromeException(String message) {
+        super(message);
+    }
     //Task used is wrong/invalid
-    public static class InvalidTaskTypeException extends Exception {
+    public static class InvalidTaskTypeException extends JeromeException {
         public InvalidTaskTypeException() {
-            super("Invalid or Wrong task");
+            super("Oh deary me... I'm sorry, but I don't know what task this is :-(");
         }
     }
 
     //task does not have the required fields
-    public static class EmptyTaskException extends Exception {
+    public static class EmptyTaskException extends JeromeException {
         public final String type;
+
         public EmptyTaskException(String type) {
-            super("Task is incomplete");
+            super("My bad g, the description of "
+                    + type + " cannot be empty!");
             this.type = type;
         }
     }
 
     //task fields are not correct
-    public static class WrongfulArgumentException extends Exception {
+    public static class WrongfulArgumentException extends JeromeException {
         public final String type;
         public final String from;
         public final String to;
         public final String by;
 
         public WrongfulArgumentException(String type, String from, String to, String by) {
-            super();
+            super(buildMessage(type, from, to, by));
             this.type = type;
             this.from = from;
             this.to = to;
             this.by = by;
         }
 
-        @Override
-        public String getMessage() {
+        private static String buildMessage(String type, String from, String to, String by) {
             StringBuilder sb = new StringBuilder("Aww, " + type + " does not take in the argument(s) ");
             boolean bool = false;
+
 
             if (by != null) {
                 sb.append("'by'");
@@ -53,11 +58,11 @@ public class JeromeException {
     }
 
     //tasks fields are invalid
-    public static class InvalidTaskDeclarationException extends Exception {
+    public static class InvalidTaskDeclarationException extends JeromeException {
         public final String type;
 
         public InvalidTaskDeclarationException(String type) {
-            super("Task fields are not filled in correctly");
+            super("Im soooo Sorry... " + type + " is missing fields...");
             this.type = type;
         }
     }

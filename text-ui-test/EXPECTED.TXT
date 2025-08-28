@@ -1,41 +1,48 @@
 _____________________________
-Hello, I'm Jerome!
+Wassup, I'm Jerome!
 What can I do for you?
 _____________________________
 _____________________________
-Got it! I added:
+Gotchu mahomes! I added:
 [T][ ] read book
 There are now 1 tasks!
 _____________________________
 _____________________________
-Got it! I added:
-[E][ ] project meeting(from: Mon 2pm to: 4pm)
+Gotchu mahomes! I added:
+[D][ ] return book(by: Dec 2 2019, 6:00 pm)
 There are now 2 tasks!
 _____________________________
 _____________________________
-Got it! I added:
-[D][ ] return book(by: Sunday)
+Gotchu mahomes! I added:
+[E][ ] project meeting(from: Dec 2 2019, 2:00 pm to: Dec 2 2019, 4:00 pm)
 There are now 3 tasks!
 _____________________________
-_____________________________
-Aww, todo does not take in the argument(s) 'from'
-_____________________________
-_____________________________
-Aww, event does not take in the argument(s) 'by'
-_____________________________
-_____________________________
-Aww, deadline does not take in the argument(s) 'from'
-_____________________________
-Here are you tasks:
+Here are your tasks broski:
 1. [T][ ] read book
-2. [E][ ] project meeting(from: Mon 2pm to: 4pm)
-3. [D][ ] return book(by: Sunday)
+2. [D][ ] return book(by: Dec 2 2019, 6:00 pm)
+3. [E][ ] project meeting(from: Dec 2 2019, 2:00 pm to: Dec 2 2019, 4:00 pm)
+_____________________________
 Nice! I have marked the following task as complete!
-[E][x] project meeting(from: Mon 2pm to: 4pm)
+[D][x] return book(by: Dec 2 2019, 6:00 pm)
 Aww! I will unmark the following task...
+[D][ ] return book(by: Dec 2 2019, 6:00 pm)
+_____________________________
+Alright matey! I have removed this task:
 [T][ ] read book
+There are now 2 task(s)!
+_____________________________
+Here are your tasks broski:
+1. [D][ ] return book(by: Dec 2 2019, 6:00 pm)
+2. [E][ ] project meeting(from: Dec 2 2019, 2:00 pm to: Dec 2 2019, 4:00 pm)
+_____________________________
 _____________________________
 Oh deary me... I'm sorry, but I don't know what task this is :-(
 _____________________________
-Bye. Hope to see you soon!
+_____________________________
+Im soooo Sorry... deadline is missing fields...
+_____________________________
+_____________________________
+Aww, todo does not take in the argument(s) 'by'
+_____________________________
+Bye gng. Dap a homie up before you go will ya!
 _____________________________
