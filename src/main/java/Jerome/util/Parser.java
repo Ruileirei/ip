@@ -52,6 +52,14 @@ public class Parser {
             return new ListCommand();
         }
 
+        if (input.startsWith("find")) {
+            String keyword = input.substring(5).trim(); // Get the keyword after "find"
+            if (keyword.isEmpty()) {
+                throw new JeromeException.EmptyTaskException("find");
+            }
+            return new FindCommand(keyword);
+        }
+
         if (input.startsWith("mark")) {
             int index = getSize(input);
             return new MarkCommand(index, false);
