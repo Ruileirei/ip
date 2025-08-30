@@ -4,7 +4,7 @@ import Jerome.TaskList;
 import Jerome.ui.Ui;
 import Jerome.storage.Storage;
 import Jerome.task.Task;
-import Jerome.task.Todo
+import Jerome.task.Todo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
