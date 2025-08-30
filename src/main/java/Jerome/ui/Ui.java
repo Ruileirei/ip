@@ -115,4 +115,8 @@ public class Ui {
     public void showError(String msg) {
         errorText(msg);
     }
+
+    public void print(String text) {
+        System.out.println(text);
+    }
 }
