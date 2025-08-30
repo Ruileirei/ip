@@ -31,6 +31,20 @@ application {
     mainClass.set("seedu.duke.Duke")
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
+}
+
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
