@@ -3,6 +3,10 @@ package Jerome.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task.
+ * Extends the abstract class Task to add a start and end time for an event.
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -15,22 +19,37 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, inputFormat);
     }
 
+    /**
+     * Returns the raw format of the start time of the event (d/M/yyyy HHmm)
+     */
     public String getFromRaw() {
         return from.format(inputFormat);
     }
 
+    /**
+     * Returns the start time of the event as a LocalDateTime object.
+     */
     public LocalDateTime getFrom() {
         return from;
     }
 
+    /**
+     * Returns the raw format of the end time of the event (d/M/yyyy HHmm)
+     */
     public String getToRaw() {
         return to.format(inputFormat);
     }
 
+    /**
+     * Returns the end time of the event as a LocalDateTime object.
+     */
     public LocalDateTime getTo() {
         return to;
     }
 
+    /**
+     * Returns a string representation of the event task.
+     */
     @Override
     public String toString() {
         return "[E][" + this.getStatus() + "] " + description
