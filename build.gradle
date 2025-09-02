@@ -44,6 +44,15 @@ sourceSets {
     }
 }
 
+plugins {
+    id 'checkstyle'
+    // other plugins
+}
+
+checkstyle {
+    toolVersion = '11.0.0'
+}
+
 
 shadowJar {
     archiveBaseName = "duke"

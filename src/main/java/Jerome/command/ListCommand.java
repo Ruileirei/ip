@@ -1,8 +1,9 @@
 package Jerome.command;
 
 import Jerome.TaskList;
-import Jerome.ui.Ui;
 import Jerome.storage.Storage;
+import Jerome.ui.Ui;
+
 
 /**
  * Command to list all tasks in the task list.

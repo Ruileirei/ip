@@ -8,6 +8,12 @@ public abstract class Task {
     protected String description;
     protected boolean completed;
 
+    /**
+     * Constructs a new task with the given description.
+     * By default, tasks are not marked as completed.
+     *
+     * @param description The textual description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.completed = false;

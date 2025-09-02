@@ -1,19 +1,19 @@
 package Jerome.storage;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import Jerome.TaskList;
 import Jerome.task.Deadline;
 import Jerome.task.Event;
 import Jerome.task.Task;
 import Jerome.task.Todo;
-
-import java.nio.charset.StandardCharsets;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.io.IOException;
 
 /**
  * Encapsulates loading/saving tasks to and from Jerome.Jerome.txt
@@ -28,14 +28,26 @@ public class Storage {
     private static final String DIV = " | ";
     private final Path loc;
 
+    /**
+     * Constructs a default Storage object with the file path set to {@code data/Jerome.Jerome.txt}.
+     */
     public Storage() {
         this(Paths.get("data", "Jerome.Jerome.txt"));
     }
 
+    /**
+     * Constructs a Storage object with a custom file path.
+     *
+     * @param loc Path to the file for saving/loading task data.
+     */
     public Storage(Path loc) {
         this.loc = loc;
     }
 
+    /**
+     * Ensures the file and its parent directory exist.
+     * Creates them if they do not exist.
+     */
     public void makeExist() {
         try {
             if (loc.getParent() != null) {
@@ -53,10 +65,11 @@ public class Storage {
      * Reads Jerome.Jerome.txt (if it exists) and adds the saved tasks into the list when Jerome.Jerome.java is run
      *
      */
-
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        if (!Files.exists(loc)) return tasks;
+        if (!Files.exists(loc)) {
+            return tasks;
+        }
 
         try {
             List<String> cont = Files.readAllLines(loc, StandardCharsets.UTF_8);
@@ -88,44 +101,52 @@ public class Storage {
                 try {
                     Task task;
                     switch(type) {
-                        case "T":
-                            task = new Todo(desc);
-                            break;
-                        case "D":
-                            if (subStr.length < 4) {
-                                System.out.println("Warning: Skipping corrupted line " + lineNum + " (Missing deadline '/by').");
-                                continue;
-                            }
-                            try {
-                                String by = subStr[3].trim();
-                                task = new Deadline(desc, by);
-                            } catch (DateTimeParseException e) {
-                                System.out.println("Warning: Skipping line " + lineNum + " (Invalid datetime format).");
-                                continue;
-                            }
-                            break;
-                        case "E":
-                            if (subStr.length < 5) {
-                                System.out.println("Warning: Skipping corrupted line " + lineNum + " (Missing event '/from' or '/to').");
-                                continue;
-                            }
-                            try {
-                                String from = subStr[3].trim();
-                                String to = subStr[4].trim();
-                                task = new Event(desc, from, to);
-                            } catch (DateTimeParseException e) {
-                                System.out.println("Warning: Skipping line " + lineNum + " (Invalid datetime format).");
-                                continue;
-                            }
-                            break;
-                        default:
-                            System.out.println("Warning: Skipping corrupted line " + lineNum + " (Unknown type: " + type + ").");
+                    case "T":
+                        task = new Todo(desc);
+                        break;
+                    case "D":
+                        if (subStr.length < 4) {
+                            System.out.println("Warning: Skipping corrupted line "
+                                    + lineNum + " (Missing deadline '/by').");
                             continue;
+                        }
+                        try {
+                            String by = subStr[3].trim();
+                            task = new Deadline(desc, by);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Warning: Skipping line "
+                                    + lineNum + " (Invalid datetime format).");
+                            continue;
+                        }
+                        break;
+                    case "E":
+                        if (subStr.length < 5) {
+                            System.out.println("Warning: Skipping corrupted line "
+                                    + lineNum + " (Missing event '/from' or '/to').");
+                            continue;
+                        }
+                        try {
+                            String from = subStr[3].trim();
+                            String to = subStr[4].trim();
+                            task = new Event(desc, from, to);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Warning: Skipping line "
+                                    + lineNum + " (Invalid datetime format).");
+                            continue;
+                        }
+                        break;
+                    default:
+                        System.out.println("Warning: Skipping corrupted line "
+                                + lineNum + " (Unknown type: " + type + ").");
+                        continue;
                     }
-                    if (bool) task.mark();
+                    if (bool) {
+                        task.mark();
+                    }
                     tasks.add(task);
                 } catch (Exception e1) {
-                    System.out.println("Warning: Skipping corrupted line " + lineNum + " (Could not construct task: " + e1.getMessage() + ").");
+                    System.out.println("Warning: Skipping corrupted line "
+                            + lineNum + " (Could not construct task: " + e1.getMessage() + ").");
                 }
             }
 
@@ -139,7 +160,6 @@ public class Storage {
      * Formats every task in a List of tasks, and adds them into Jerome.Jerome.txt
      *
      */
-
     public void save(TaskList tasks) {
         List<String> output = new ArrayList<>();
         List<Task> ts = tasks.getAll();
@@ -161,7 +181,6 @@ public class Storage {
      *  E | 1/0 | description | from | to
      *
      */
-
     private static String formatting(Task t) {
         int status = t.isDone() ? 1 : 0;
         if (t instanceof Todo) {
@@ -170,7 +189,8 @@ public class Storage {
             return "D" + DIV + status + DIV + d.getDescription() + DIV + d.getByRaw();
         } else if (t instanceof Event eve) {
             return "E" + DIV + status + DIV + eve.getDescription() + DIV + eve.getFromRaw() + DIV + eve.getToRaw();
-        } else
+        } else {
             return "T" + DIV + status + DIV + t.toString();
+        }
     }
 }

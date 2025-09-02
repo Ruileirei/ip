@@ -13,6 +13,13 @@ public class Event extends Task {
     private static final DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
     private static final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
+    /**
+     * Constructs an {@code Event} with the given description and time range.
+     *
+     * @param description Task description.
+     * @param from Start datetime in format "d/M/yyyy HHmm".
+     * @param to End datetime in format "d/M/yyyy HHmm".
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = LocalDateTime.parse(from, inputFormat);

@@ -1,16 +1,16 @@
 package Jerome.ui;
 
-import Jerome.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import Jerome.task.Task;
 
 /**
  * Handles user interface interactions and displays messages to the user.
  * Responsible for displaying the welcome message, task list, errors, and more.
  */
 public class Ui {
-    private final String LINE = "_____________________________";
+    private static final String LINE = "_____________________________";
     private final Scanner sc = new Scanner(System.in);
 
     /**
@@ -96,7 +96,7 @@ public class Ui {
      * Reads the user's command from the console.
      */
     public String readCommand() {
-        if(sc.hasNextLine()) {
+        if (sc.hasNextLine()) {
             return sc.nextLine();
         }
         return "bye";

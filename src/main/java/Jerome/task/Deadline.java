@@ -12,6 +12,12 @@ public class Deadline extends Task {
     private static final DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
     private static final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
+    /**
+     * Constructs a {@code Deadline} with the given description and due date.
+     *
+     * @param description Task description.
+     * @param by Deadline in format "d/M/yyyy HHmm".
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDateTime.parse(by, inputFormat);
