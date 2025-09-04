@@ -62,10 +62,11 @@ public class Main extends Application {
             return;
         }
         String response = jerome.getResponse(userText);
-        dialogContainer.getChildren().addAll(
+        addDialogs(dialogContainer,
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getDukeDialog(response, JeromeImage)
         );
+
         userInput.clear();
 
         // Auto-scroll to the latest message
@@ -80,6 +81,10 @@ public class Main extends Application {
             pause.setOnFinished(event -> Platform.exit()); // Exit the app after 2 seconds
             pause.play();
         }
+    }
+
+    public static void addDialogs(VBox container, DialogBox... boxes) {
+        container.getChildren().addAll(boxes);
     }
 
 
