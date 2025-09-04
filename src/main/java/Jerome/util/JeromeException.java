@@ -78,12 +78,16 @@ public class JeromeException extends Exception {
                 bool = true;
             }
             if (from != null) {
-                if (bool) sb.append(", ");
+                if (bool) {
+                    sb.append(", ");
+                }
                 sb.append("'from'");
                 bool = true;
             }
             if (to != null) {
-                if (bool) sb.append(", ");
+                if (bool) {
+                    sb.append(", ");
+                }
                 sb.append("'to'");
             }
             return sb.toString();

@@ -32,13 +32,14 @@ public class DeleteCommand extends Command {
      * @throws JeromeException If the index is invalid for deletion.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JeromeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JeromeException {
         if (index < 0 || index >= tasks.size()) {
             throw new JeromeException("Invalid task index for deletion.");
         }
         Task removed = tasks.remove(index);
-        ui.successfulDeleteText(removed, tasks.size());
         storage.save(tasks);
+        return ui.successfulDeleteText(removed, tasks.size());
+
     }
 }
 

@@ -11,7 +11,6 @@ import Jerome.ui.Ui;
  * that the program should exit.
  */
 public class ByeCommand extends Command {
-
     /**
      * Executes the exit command.
      *
@@ -20,8 +19,8 @@ public class ByeCommand extends Command {
      * @param storage The storage component (not used in this command).
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.goodbyeText();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.goodbyeText();
     }
 
     /**

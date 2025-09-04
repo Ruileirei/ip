@@ -16,7 +16,7 @@ import Jerome.task.Task;
 import Jerome.task.Todo;
 
 /**
- * Encapsulates loading/saving tasks to and from Jerome.Jerome.txt
+ * Encapsulates loading/saving tasks to and from Jerome.txt
  * Format:
  *  T | 1/0 | description
  *  D | 1/0 | description | by
@@ -32,7 +32,7 @@ public class Storage {
      * Constructs a default Storage object with the file path set to {@code data/Jerome.Jerome.txt}.
      */
     public Storage() {
-        this(Paths.get("data", "Jerome.Jerome.txt"));
+        this(Paths.get("data", "Jerome.txt"));
     }
 
     /**

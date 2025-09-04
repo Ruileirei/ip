@@ -8,10 +8,9 @@ import java.time.format.DateTimeFormatter;
  * Extends the abstract class Task to add a specific deadline for a task.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
     private static final DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
     private static final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-
+    protected LocalDateTime by;
     /**
      * Constructs a {@code Deadline} with the given description and due date.
      *

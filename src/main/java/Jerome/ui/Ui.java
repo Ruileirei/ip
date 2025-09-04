@@ -10,86 +10,66 @@ import Jerome.task.Task;
  * Responsible for displaying the welcome message, task list, errors, and more.
  */
 public class Ui {
-    private static final String LINE = "_____________________________";
     private final Scanner sc = new Scanner(System.in);
 
     /**
      * Displays the welcome message when the application starts.
      */
-    public void welcomeText() {
-        System.out.println(LINE
-                + "\nWassup, I'm Jerome.Jerome!\nWhat can I do for you?\n"
-                + LINE);
+    public static String welcomeText() {
+        return "Wassup, I'm Jerome!\nWhat can I do for you?";
+
     }
 
     /**
      * Displays the goodbye message when the application exits.
      */
-    public void goodbyeText() {
-        System.out.println("Bye gng. Dap a homie up before you go will ya!\n"
-                + LINE);
-    }
-
-    /**
-     * Prints a horizontal line for separation.
-     */
-    public void lineText() {
-        System.out.println(LINE);
+    public String goodbyeText() {
+        return "Bye gng. Dap a homie up before you go will ya!\n";
     }
 
     /**
      * Displays an error message with a custom message.
      */
     public void errorText(String msg) {
-        System.out.println(LINE
-                + "\n" + msg + "\n"
-                + LINE);
+        System.out.println(msg);
     }
 
     /**
      * Displays a success message when a task is added.
      */
-    public void successfulAddText(Task t, int size) {
-        System.out.println(LINE
-                + "\nGotchu mahomes! I added:\n" + t + "\nThere are now " + size + " tasks!\n"
-                + LINE);
+    public String successfulAddText(Task t, int size) {
+        return "Gotchu mahomes! I added:\n" + t + "\nThere are now " + size + " tasks!\n";
     }
 
     /**
      * Displays a success message when a task is deleted.
      */
-    public void successfulDeleteText(Task t, int size) {
-        System.out.println(LINE
-                + "\nAlright matey! I have removed this task:\n" + t + "\nThere are now " + size + " task(s)!\n"
-                + LINE);
+    public String successfulDeleteText(Task t, int size) {
+        return "Alright matey! I have removed this task:\n" + t + "\nThere are now " + size + " task(s)!\n";
     }
 
     /**
      * Prints the task list to the console.
      */
-    public void printTaskList(List<Task> tasks) {
+    public String taskListText(List<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("You trippin...there aint no tasks");
+            return "You trippin...there aint no tasks";
         } else {
-            System.out.println("Here are your tasks broski:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are your tasks broski:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i));
+                sb.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
             }
+            return sb.toString();
         }
     }
 
-    /**
-     * Displays an error message when the index is invalid.
-     */
-    public void invalidIndexText() {
-        errorText("Mah bad dude! I can't find that task...");
+    public String successfulMarkText(Task task) {
+        return "Nice! I have marked the following task as complete!\n" + task + "\n";
     }
 
-    /**
-     * Displays an error message when the date/time format is invalid.
-     */
-    public void invalidDateTimeText() {
-        errorText("Sorry! The date/time must be in format: d/M/yyyy HHmm (e.g., 2/12/2019 1800)");
+    public String successfulUnmarkText(Task task) {
+        return "Nice! I have marked the following task as complete!\n" + task + "\n";
     }
 
     /**
@@ -114,9 +94,5 @@ public class Ui {
      */
     public void showError(String msg) {
         errorText(msg);
-    }
-
-    public void print(String text) {
-        System.out.println(text);
     }
 }

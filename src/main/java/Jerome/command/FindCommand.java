@@ -29,24 +29,22 @@ public class FindCommand extends Command {
      * @param storage The storage component (not used here).
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("_____________________________\n");
+        sb.append("Here are the matching tasks in your list:\n");
         boolean isFound = false;
-
-        ui.lineText();
-        ui.print("Here are the matching tasks in your list: ");
-
         for (int i = 0; i < tasks.size(); i++) {
             String desc = tasks.get(i).getDescription().toLowerCase();
             if (desc.contains(keyword)) {
-                ui.print((i + 1) + ". " + tasks.get(i));
+                sb.append((i + 1)).append(". ").append(tasks.get(i)).append("\n");
                 isFound = true;
             }
         }
-
         if (!isFound) {
-            ui.print("No tasks match your search...");
+            sb.append("No tasks match your search...\n");
         }
-
-        ui.lineText();
+        sb.append("_____________________________");
+        return sb.toString();
     }
 }

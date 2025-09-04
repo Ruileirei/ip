@@ -50,6 +50,22 @@ public class Jerome {
         ui.close();
     }
 
+    /**
+     * Returns Jerome's response to user input.
+     *
+     * @param input The user's input string.
+     * @return Jerome's reply as a string.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String response = command.execute(tasks, ui, storage);
+            return response;
+        } catch (JeromeException e) {
+            return e.getMessage(); // Show error in GUI
+        }
+    }
+
     public static void main(String[] args) {
         new Jerome().run();
     }

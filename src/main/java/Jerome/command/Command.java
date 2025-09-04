@@ -19,14 +19,13 @@ public abstract class Command {
      * @param storage The storage component to save data.
      * @throws JeromeException If an error occurs during command execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws JeromeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JeromeException;
 
     /**
      * Determines if the command is an exit command.
      *
      * @return false by default. Specific commands may override this method.
      */
-
     public boolean isExit() {
         return false;
     }
