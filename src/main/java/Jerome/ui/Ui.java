@@ -7,13 +7,13 @@ import Jerome.task.Task;
 
 /**
  * Handles user interface interactions and displays messages to the user.
- * Responsible for displaying the welcome message, task list, errors, and more.
+ * Responsible for returning the welcome message, task list, errors, and more.
  */
 public class Ui {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Displays the welcome message when the application starts.
+     * Return the welcome message when the application starts.
      */
     public static String welcomeText() {
         return "Wassup, I'm Jerome!\nWhat can I do for you?";
@@ -21,35 +21,35 @@ public class Ui {
     }
 
     /**
-     * Displays the goodbye message when the application exits.
+     * Return the goodbye message when the application exits.
      */
     public String goodbyeText() {
         return "Bye gng. Dap a homie up before you go will ya!\n";
     }
 
     /**
-     * Displays an error message with a custom message.
+     * Return an error message with a custom message.
      */
     public void errorText(String msg) {
         System.out.println(msg);
     }
 
     /**
-     * Displays a success message when a task is added.
+     * Return a success message when a task is added.
      */
     public String successfulAddText(Task t, int size) {
         return "Gotchu mahomes! I added:\n" + t + "\nThere are now " + size + " tasks!\n";
     }
 
     /**
-     * Displays a success message when a task is deleted.
+     * Return a success message when a task is deleted.
      */
     public String successfulDeleteText(Task t, int size) {
         return "Alright matey! I have removed this task:\n" + t + "\nThere are now " + size + " task(s)!\n";
     }
 
     /**
-     * Prints the task list to the console.
+     * Return the task list to GUI.
      */
     public String taskListText(List<Task> tasks) {
         if (tasks.isEmpty()) {

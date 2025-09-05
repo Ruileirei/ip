@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 /**
- * A custom JavaFX control that represents a chat dialog box, consisting of a text label and a circular profile image.
+ * A JavaFX control that represents a chat dialog box, consisting of a text label and a circular profile image.
  * The dialog box layout is defined via FXML, and this class acts as both the root and controller using fx:root.
  */
 public class DialogBox extends HBox {
