@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws JeromeException {
+        assert (index >= 0 && index < tasks.size()) : "Index is out of bounds: " + index;
         if (index < 0 || index >= tasks.size()) {
             throw new JeromeException("Invalid task index for deletion.");
         }

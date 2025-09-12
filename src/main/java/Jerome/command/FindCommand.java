@@ -31,7 +31,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
-        sb.append("_____________________________\n");
         sb.append("Here are the matching tasks in your list:\n");
         boolean isFound = false;
         for (int i = 0; i < tasks.size(); i++) {
@@ -44,7 +43,6 @@ public class FindCommand extends Command {
         if (!isFound) {
             sb.append("No tasks match your search...\n");
         }
-        sb.append("_____________________________");
         return sb.toString();
     }
 }

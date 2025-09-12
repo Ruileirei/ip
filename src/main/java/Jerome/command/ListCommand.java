@@ -4,7 +4,6 @@ import Jerome.TaskList;
 import Jerome.storage.Storage;
 import Jerome.ui.Ui;
 
-
 /**
  * Command to list all tasks in the task list.
  * This command prints out all tasks to the UI.

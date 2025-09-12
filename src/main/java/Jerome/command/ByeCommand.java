@@ -4,7 +4,6 @@ import Jerome.TaskList;
 import Jerome.storage.Storage;
 import Jerome.ui.Ui;
 
-
 /**
  * Command to exit the application.
  * This command triggers the goodbye message on the UI and indicates
