@@ -99,26 +99,14 @@ public class Storage {
                         break;
                     case "D":
                         assert subStr.length >= 4 : "Corrupted line " + lineNum + " (Missing deadline '/by').";
-                        try {
-                            String by = subStr[3].trim();
-                            task = new Deadline(desc, by);
-                        } catch (DateTimeParseException e) {
-                            System.out.println("Warning: Skipping line "
-                                    + lineNum + " (Invalid datetime format).");
-                            continue;
-                        }
+                        String by = subStr[3].trim();
+                        task = new Deadline(desc, by);
                         break;
                     case "E":
                         assert subStr.length >= 5 : "Corrupted line " + lineNum + " (Missing event '/from' or '/to').";
-                        try {
-                            String from = subStr[3].trim();
-                            String to = subStr[4].trim();
-                            task = new Event(desc, from, to);
-                        } catch (DateTimeParseException e) {
-                            System.out.println("Warning: Skipping line "
-                                    + lineNum + " (Invalid datetime format).");
-                            continue;
-                        }
+                        String from = subStr[3].trim();
+                        String to = subStr[4].trim();
+                        task = new Event(desc, from, to);
                         break;
                     default:
                         System.out.println("Warning: Skipping corrupted line "
@@ -129,9 +117,12 @@ public class Storage {
                         task.mark();
                     }
                     tasks.add(task);
-                } catch (Exception e1) {
+                } catch (DateTimeParseException e1) {
+                    System.out.println("Warning: Skipping line "
+                            + lineNum + " (Invalid datetime format).");
+                } catch (Exception e2) {
                     System.out.println("Warning: Skipping corrupted line "
-                            + lineNum + " (Could not construct task: " + e1.getMessage() + ").");
+                            + lineNum + " (Could not construct task: " + e2.getMessage() + ").");
                 }
             }
 
