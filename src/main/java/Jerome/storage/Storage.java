@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import Jerome.TaskList;
 import Jerome.task.Deadline;
@@ -148,17 +149,9 @@ public class Storage {
     public void save(TaskList tasks) {
         assert tasks != null : "TaskList is Null";
 
-        List<String> output = new ArrayList<>();
-        List<Task> ts = tasks.getAll();
-
-        assert ts != null : "The list of tasks retrieved is null.";
-        assert !ts.isEmpty() : "The task list is empty.";
-
-        for (Task t : ts) {
-            output.add(formatting(t));
-        }
-
-        assert output != null : "Formatted task list is null.";
+        List<String> output = tasks.getAll().stream()
+                .map(this::formatting)
+                .collect(Collectors.toList());
         assert !output.isEmpty() : "Formatted task list is empty.";
 
         try {
@@ -178,7 +171,7 @@ public class Storage {
      *  E | 1/0 | description | from | to
      *
      */
-    private static String formatting(Task t) {
+    private String formatting(Task t) {
         int status = t.isDone() ? 1 : 0;
         if (t instanceof Todo) {
             return "T" + DIV + status + DIV + t.getDescription();
