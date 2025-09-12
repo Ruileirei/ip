@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-
 /**
  * JavaFX entry point for Jerome chatbot GUI.
  */

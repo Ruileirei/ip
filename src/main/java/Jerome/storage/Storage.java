@@ -56,6 +56,7 @@ public class Storage {
             if (!Files.exists((loc))) {
                 Files.write(loc, new byte[0]);
             }
+            assert Files.exists(loc) : "File does not exist after creation attempt: " + loc;
         } catch (IOException e) {
             System.out.println("Warning, path: " + loc + " not found. Changes cannot be saved.");
         }
@@ -73,6 +74,7 @@ public class Storage {
 
         try {
             List<String> cont = Files.readAllLines(loc, StandardCharsets.UTF_8);
+            assert cont != null && !cont.isEmpty() : "Loaded file content is empty or null.";
             int lineNum = 0;
             for (String line: cont) {
                 lineNum++;
@@ -80,23 +82,14 @@ public class Storage {
                     continue;
                 }
                 String[] subStr = line.split("\\s\\|\\s");
-                if (subStr.length < 3) {
-                    System.out.println("Warning: Skipping corrupted line " + lineNum + " (Too few fields).");
-                    continue;
-                }
+                assert subStr.length >= 3 : "Corrupted line " + lineNum + " (Too few fields).";
                 String type = subStr[0].trim();
                 String status = subStr[1].trim();
                 String desc = subStr[2].trim();
                 boolean bool;
 
-                if (status.equals("1")) {
-                    bool = true;
-                } else if (status.equals("0")) {
-                    bool = false;
-                } else {
-                    System.out.println("Warning: Skipping corrupted line " + lineNum + " (Invalid Status).");
-                    continue;
-                }
+                assert status.equals("0") || status.equals("1") : "Invalid status value in line " + lineNum;
+                bool = status.equals("1");
 
                 try {
                     Task task;
@@ -105,11 +98,7 @@ public class Storage {
                         task = new Todo(desc);
                         break;
                     case "D":
-                        if (subStr.length < 4) {
-                            System.out.println("Warning: Skipping corrupted line "
-                                    + lineNum + " (Missing deadline '/by').");
-                            continue;
-                        }
+                        assert subStr.length >= 4 : "Corrupted line " + lineNum + " (Missing deadline '/by').";
                         try {
                             String by = subStr[3].trim();
                             task = new Deadline(desc, by);
@@ -120,11 +109,7 @@ public class Storage {
                         }
                         break;
                     case "E":
-                        if (subStr.length < 5) {
-                            System.out.println("Warning: Skipping corrupted line "
-                                    + lineNum + " (Missing event '/from' or '/to').");
-                            continue;
-                        }
+                        assert subStr.length >= 5 : "Corrupted line " + lineNum + " (Missing event '/from' or '/to').";
                         try {
                             String from = subStr[3].trim();
                             String to = subStr[4].trim();
@@ -161,12 +146,24 @@ public class Storage {
      *
      */
     public void save(TaskList tasks) {
+        assert tasks != null : "TaskList is Null";
+
         List<String> output = new ArrayList<>();
         List<Task> ts = tasks.getAll();
+
+        assert ts != null : "The list of tasks retrieved is null.";
+        assert !ts.isEmpty() : "The task list is empty.";
+
         for (Task t : ts) {
             output.add(formatting(t));
         }
+
+        assert output != null : "Formatted task list is null.";
+        assert !output.isEmpty() : "Formatted task list is empty.";
+
         try {
+            assert loc != null : "The file path is null.";
+
             Files.write(loc, output, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("Warning: Could not save tasks to " + loc + ".");

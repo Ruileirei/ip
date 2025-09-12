@@ -5,8 +5,6 @@ import Jerome.storage.Storage;
 import Jerome.task.Task;
 import Jerome.ui.Ui;
 
-
-
 /**
  * Command to add a task to the task list.
  * This command adds the specified task to the list and then displays
