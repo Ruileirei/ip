@@ -29,17 +29,24 @@ public class DialogBox extends HBox {
      */
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialog.maxWidthProperty().bind(
+                    javafx.beans.binding.Bindings.max(
+                            this.widthProperty().multiply(0.7),
+                            400.0
+                    )
+            );
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         dialog.setText(text);
+        HBox.setHgrow(dialog, javafx.scene.layout.Priority.ALWAYS);
         displayPicture.setImage(img);
-
+        //Set images to be circles
         double radius = 30;
         Circle clip = new Circle(radius, radius, radius);
         displayPicture.setClip(clip);
@@ -56,7 +63,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setAlignment(Pos.TOP_RIGHT);
-        db.getChildren().setAll(db.dialog, db.displayPicture.getParent()); // text left, image right
+        db.getChildren().setAll(db.dialog, db.displayPicture);
         return db;
     }
 
@@ -68,12 +75,23 @@ public class DialogBox extends HBox {
      * @param img  The chatbot's profile image.
      * @return A DialogBox formatted for bot output.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getJeromeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setAlignment(Pos.TOP_LEFT);
-        db.getChildren().setAll(db.displayPicture.getParent(), db.dialog); // image left, text right
+        db.getChildren().setAll(db.displayPicture, db.dialog);
         return db;
     }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.setAlignment(Pos.TOP_LEFT);
+        db.getChildren().setAll(db.displayPicture, db.dialog);
+
+        // Apply error style
+        db.dialog.setStyle("-fx-text-fill: red; -fx-font-weight: bold; -fx-background-color: #ffeeee; -fx-padding: 8; -fx-background-radius: 10;");
+        return db;
+    }
+
 }
 
 

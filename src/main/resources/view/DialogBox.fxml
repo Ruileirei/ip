@@ -11,7 +11,6 @@
          spacing="10.0"
          style="-fx-padding: 10;">
     <children>
-        <!-- Profile image (circular) -->
         <StackPane>
             <ImageView fx:id="displayPicture"
                        fitHeight="60.0"
@@ -22,7 +21,8 @@
         <Label fx:id="dialog"
                wrapText="true"
                style="-fx-background-color: #b3e5fc; -fx-padding: 10; -fx-background-radius: 15;"
-               maxWidth="250.0" />
+               maxWidth="360.0"
+               HBox.hgrow="ALWAYS" />
     </children>
 </fx:root>
 

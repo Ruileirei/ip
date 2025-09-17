@@ -20,7 +20,7 @@ public class JeromeException extends Exception {
      */
     public static class InvalidTaskTypeException extends JeromeException {
         public InvalidTaskTypeException() {
-            super("Oh deary me... I'm sorry, but I don't know what task this is :-(");
+            super("Error! \n Oh deary me... I'm sorry, but I don't know what task this is :-(");
         }
     }
 
@@ -36,7 +36,7 @@ public class JeromeException extends Exception {
          * @param type The task type (e.g. "todo", "event").
          */
         public EmptyTaskException(String type) {
-            super("My bad g, the description of "
+            super("Error! \n My bad g, the description of "
                     + type + " cannot be empty!");
             this.type = type;
         }
@@ -61,7 +61,7 @@ public class JeromeException extends Exception {
          * @param by   Whether it wrongly includes "/by".
          */
         public WrongfulArgumentException(String type, String from, String to, String by) {
-            super(buildMessage(type, from, to, by));
+            super("Error!" + buildMessage(type, from, to, by));
             this.type = type;
             this.from = from;
             this.to = to;
@@ -106,7 +106,7 @@ public class JeromeException extends Exception {
          * @param type The task type (e.g. "event", "deadline").
          */
         public InvalidTaskDeclarationException(String type) {
-            super("Im soooo Sorry... " + type + " is missing fields...");
+            super("Error! \n Im soooo Sorry... " + type + " is missing fields...");
             this.type = type;
         }
     }
