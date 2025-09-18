@@ -70,7 +70,7 @@ public class Ui {
     }
 
     public String successfulUnmarkText(Task task) {
-        return "Nice! I have marked the following task as complete!\n" + task + "\n";
+        return "How do you un-finish a task? Anyways I've unmarked the following task...\n" + task + "\n";
     }
 
     /**
