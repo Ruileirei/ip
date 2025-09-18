@@ -65,7 +65,8 @@ public class Ui {
     }
 
     public String successfulMarkText(Task task) {
-        return "Nice! I have marked the following task as complete!\n" + task + "\n";
+        return "Sheesh what a productive monkey you are."
+            + "\n I have marked the following task as complete!\n" + task + "\n";
     }
 
     public String successfulUnmarkText(Task task) {

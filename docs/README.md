@@ -39,6 +39,7 @@ mark 2
 ```
 ### Expected Outputs
 ```
+Sheesh what a productive monkey you are.
 Nice! I've marked this task as done:
 [D][X] finish assignment (by: 18/9/2025 11:59 pm)
 ```
